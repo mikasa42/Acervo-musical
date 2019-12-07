@@ -501,7 +501,7 @@ def main():
             os.system("clear")
             escolha = 1
             while(escolha == 1):
-                print('Deseja pesquisar por')
+                print('Deseja pesquisar por, caso deseje sair digite(-1)')
                 print('1)Por Artista')
                 print('2)Por Musica')
                 print('3)Po Genero')
@@ -511,8 +511,11 @@ def main():
                     print('Digite:')
                     print('1)Se sim')
                     print('2)se nao')
-                    escolha = int(input())
-                    if(escolha == 2):
+                    opcao = int(input())
+                    if(opcao == 1):
+                        pesquisaArtista()
+
+                    if(opcao == 2):
                         print('Deseja continuar a pesquisa')
                         print('Digite:')
                         print('1)Continuar')
@@ -526,8 +529,10 @@ def main():
                     print('Digite:')
                     print('1)Se sim')
                     print('2)se nao')
-                    escolha = int(input())
-                    if(escolha == 2):
+                    opcao = int(input())
+                    if(opcao == 1):
+                        pesquisaMusica()
+                    if(opcao == 2):
                         print('Deseja continuar a pesquisa')
                         print('Digite:')
                         print('1)Continuar')
@@ -540,8 +545,11 @@ def main():
                     print('Digite:')
                     print('1)Se sim')
                     print('2)se nao')
-                    escolha = int(input())
-                    if(escolha == 2):
+                    opcao = int(input())
+                    if(opcao == 1):
+                        pesquisaGenero()
+
+                    if(opcao== 2):
                         print('Deseja continuar a pesquisa?')
                         print('Digite:')
                         print('1)Continuar')
@@ -549,9 +557,11 @@ def main():
                         escolha = int(input())
                         if(escolha == 1):
                             pesquisaGenero()
-                if(operador == 5):
-                    os.system('clear')
-                    ordena()
+                if(opcao == -1):
+                    escolha = 2
+        if(operador == 5):
+            os.system('clear')
+            ordena()
 
 main()        
 
