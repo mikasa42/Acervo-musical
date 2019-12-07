@@ -25,7 +25,136 @@ def criarArquivo():
         arquivo.close()
     except FileNotFoundError:
         arquivo = open('Musicas.txt','w+')
-        
+def ordena():
+    arquivo = open('Musicas.txt','r+')
+    arquivo.seek(0,0)
+    lista = arquivo.readlines()
+    arquivo.close() 
+    musicas = []
+    cont = 0 
+    for line in lista:
+        cont +=1
+        line = line[:-1] 
+        linha_split = line.split(';')
+        musica = {'Id':linha_split[0],'Nome':linha_split[1],'Genero':linha_split[2]}
+        musicas +=[musica]   
+        aux = ''
+        for index1 in range (len (musicas)-1):
+                for index2 in range (index1 + 1 , len (musicas)):
+                        if musicas[index1]['Nome'] > musicas[index2]['Nome']:
+                                aux = musicas[index1]
+                                musicas[index1] = musicas[index2]
+                                musicas[index2] = aux
+    print('lista em ordem alfabetica')
+    for i in range(len(musicas)):
+        print('Seu atributo identificador:'+musicas[i]['Id']+' /'+
+                ' Seu nome :'+musicas[i]['Nome']+' /'+' Seu genero:'+musicas[i]['Genero'])
+def pesquisaGenero():
+    arquivo = open('Genero.txt','r+')
+    arquivo.seek(0,0)
+    lista = arquivo.readlines()
+    arquivo.close()
+    print('Essa lista a seguir sao seus generos')
+    print('Se quiser mais musica de algum genero digite o numero correspondente')
+    print('Se sua musica nao esta na lista digite -1 para voltar ao menu inicial')
+    cont = 0
+    generos = []
+    for line in lista:
+        cont +=1
+        line = line[:-1] 
+        print(cont,line)
+    id = int(input())
+    if(id != -1):
+        id = id-1
+        genero = lista[id][:-1]
+        arquivo = open('Musicas.txt','r+')
+        arquivo.seek(0,0)
+        lista = arquivo.readlines()
+        arquivo.close() 
+        musicas = []
+        cont = 0 
+        for line in lista:
+            cont +=1
+            line = line[:-1] 
+            linha_split = line.split(';')
+            musica = {'Id':linha_split[0],'Nome':linha_split[1],'Genero':linha_split[2]}
+            musicas +=[musica]   
+        listAux = [] 
+        for i in range(len(musicas)):
+            if(genero == musicas[i]['Genero']):
+                listAux += [musicas[i]]
+        for i in range(len(listAux)):
+            print('Seu atributo identificador:'+musicas[i]['Id']+
+                ' Seu nome :'+musicas[i]['Nome']+' Seu genero:'+musicas[i]['Genero'])
+def pesquisaMusica():
+    arquivo = open('Musicas.txt','r+')
+    arquivo.seek(0,0)
+    lista = arquivo.readlines()
+    arquivo.close()
+    print('Essa lista a seguir sao suas musicas')
+    print('Se quiser mais detalhes dessa musica digite o numero correspondente')
+    print('Se sua musica nao esta na lista digite -1 para voltar ao menu inicial')
+    cont = 0
+    musicas = []
+    for line in lista:
+        cont +=1
+        line = line[:-1] 
+        linha_split = line.split(';')
+        musica = {'Id':linha_split[0],'Nome':linha_split[1],'Genero':linha_split[2]}
+        musicas +=[musica]
+        print(cont,linha_split[1])
+    id = int(input())
+    if(id == -1):
+        print('Sua musica nao existe, voltar ao menu')
+    if(id != -1):
+        id = id -1
+        print('Seu atributo identificador:'+musicas[id]['Id']+
+                ' Seu nome :'+musicas[id]['Nome']+' Seu genero:'+musicas[id]['Genero'])
+def pesquisaArtista():
+
+    arquivo = open('Artistas.txt','r+')
+    arquivo.seek(0,0)
+    lista = arquivo.readlines()
+    arquivo.close()
+    print(" Abaixo segue uma lista de de artistas para voce escolher")
+    print(" digite o numero correspondente")
+    print(" Caso seu artista não esteja aqui, digite (-1),Sendo assim ")
+    print(" voce sera redirecionado para o menu, apartir dai escolha")
+    print(" a opcao para criar um novo artista ")
+    cont = 0
+    artistas = []
+    for line in lista:
+        cont+= 1
+        line = line[:-1] 
+        linha_split = line.split(';')
+        artista= {'Id':linha_split[0],'Nome':linha_split[1],'IdMusicas':linha_split[2]}
+        artistas +=[artista]
+        print(cont,linha_split[1])#organizar de forma que apareça só o nome
+    id = int(input())
+    id = id -1
+    idMusica = ''
+    for i in range (len(artistas)):
+        if(id == i):
+            idMusica = artistas[i]['IdMusicas']
+    id_split = []
+    id_split = idMusica.split(',')  
+    if(id != -1):
+        arquivo = open('Musicas.txt','r+')
+        arquivo.seek(0,0)
+        lista = arquivo.readlines()
+        arquivo.close()
+        print('Essa lista a seguir sao suas musicas')
+        IdAntigo = ''
+        cont = 0
+        for line in lista:
+            cont +=1
+            line = line[:-1] 
+            linha_split = line.split(';')
+            IdAntigo = linha_split[0]
+            nome = linha_split[1]
+            for i in range (len(id_split)):
+                if(IdAntigo == id_split[i]):
+                    print(cont,nome)#organizar de forma que apareça só o nome   
 
 
 def apagarMusica(nomeArtista):
@@ -117,8 +246,13 @@ def atualizarDadosArtista(nome,idNovo):
     for i in range(len(artistas)):
         if(artistas[i]['Nome'] == nome):
             idRef = artistas[i]['IdMusicas']
-    idMusica = idRef +','+str(idNovo)
-    artistas[posicao]['IdMusicas'] = idMusica
+            posicao = i
+    if(len(idRef) == 0):
+        idMusica = str(idNovo)
+        artistas[posicao]['IdMusicas'] = idMusica
+    if(len(idRef) != 0):
+        idMusica = idRef +','+str(idNovo)
+        artistas[posicao]['IdMusicas'] = idMusica
     arquivo = open('Artistas.txt','r+')
     arquivo.seek(0,0)
     for i in range (len(lista)):
@@ -363,5 +497,61 @@ def main():
                     print('Se deseja apagar mais uma musica digite 2')
                     print('Caso contrario digite 1')
                     escolha = int(input())
+        if(operador == 4):
+            os.system("clear")
+            escolha = 1
+            while(escolha == 1):
+                print('Deseja pesquisar por')
+                print('1)Por Artista')
+                print('2)Por Musica')
+                print('3)Po Genero')
+                opcao = int(input())
+                if(opcao == 1):
+                    print('Deseja continuar a pesquisa por Artista?')
+                    print('Digite:')
+                    print('1)Se sim')
+                    print('2)se nao')
+                    escolha = int(input())
+                    if(escolha == 2):
+                        print('Deseja continuar a pesquisa')
+                        print('Digite:')
+                        print('1)Continuar')
+                        print('2)Menu Principal')
+                        escolha = int(input())
+                        if(escolha == 1):
+                            pesquisaArtista()
+
+                if(opcao == 2):
+                    print('Deseja continuar a pesquisa por Musica?')
+                    print('Digite:')
+                    print('1)Se sim')
+                    print('2)se nao')
+                    escolha = int(input())
+                    if(escolha == 2):
+                        print('Deseja continuar a pesquisa')
+                        print('Digite:')
+                        print('1)Continuar')
+                        print('2)Menu Principal')
+                        escolha = int(input())
+                        if(escolha == 1):
+                            pesquisaMusica()
+                if(opcao == 3):
+                    print('Deseja continuar a pesquisa por Genero?')
+                    print('Digite:')
+                    print('1)Se sim')
+                    print('2)se nao')
+                    escolha = int(input())
+                    if(escolha == 2):
+                        print('Deseja continuar a pesquisa?')
+                        print('Digite:')
+                        print('1)Continuar')
+                        print('2)Menu Principal')
+                        escolha = int(input())
+                        if(escolha == 1):
+                            pesquisaGenero()
+                if(operador == 5):
+                    os.system('clear')
+                    ordena()
+
 main()        
 
