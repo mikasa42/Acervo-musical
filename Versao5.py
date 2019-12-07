@@ -1,6 +1,7 @@
 
 import os
 from time import sleep
+import pygame
 
 def criarArquivo():
     try:
@@ -339,6 +340,8 @@ def adcionarMusica(nomeArtista):
         escolha = escolha -1
         if(escolha == -1):
             nome = input('Digite o novo genero que deseja adicionar\n')
+            nome = nome.strip()
+            nome = nome.casefold()
             criarGenero(nome)
             genero = nome
         if(escolha != -1):
@@ -397,7 +400,11 @@ def adcionarArtista(Nome,arquivo):
     sleep(5)
 def main():
     criarArquivo()
+    pygame.init()
+    pygame.mixer.music.load('2')
+    pygame.mixer.music.play()
     os.system("clear")
+    print('Ajuste seus fones de ouvido !')
     operador = 1
     while(operador !=6):
         print('* * * * * * * * * * * * * * * * * * * *')
@@ -423,6 +430,8 @@ def main():
              while(escolha == 1):
                 os.system("clear")
                 artista = input('Digite o nome do artista(No minimo 1 caractere)\n')
+                artista = artista.casefold()
+                artista = artista.strip()
                 arquivo = open('Artistas.txt','r+')
                 print('Confimacao, este é o artista desejado?'+ ' '+artista)
                 print('1) Se sim')
@@ -443,7 +452,9 @@ def main():
                     resp = int(input())
                     if(resp == 2):
                         print('Digite o nome do artista desejado de novo')
-                        artista = input() #usar o casefold()
+                        artista = input() 
+                        artista = artista.casefold()
+                        artista = artista.strip()
                         print('Confimacao, este é o artista desejado?'+ " " + artista)
                         print('1) sim')
                         print('2) Nao')
@@ -483,7 +494,6 @@ def main():
                 if(id != -1):
                     id = id -1
                     Nome = nome[id] 
-                    print(Nome)
                     os.system('clear')
                     adcionarMusica(Nome)
                     os.system('clear')
