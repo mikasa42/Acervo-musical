@@ -2,7 +2,7 @@
 import os
 from time import sleep
 import pygame
-
+#Funcao que cria os arquivos necessarios para rodar o programa caso eles nao existam na pasta onde o programa está
 def criarArquivo():
     try:
         arquivo = open('Artistas.txt','r+')
@@ -54,9 +54,11 @@ def pesquisaGenero():
     arquivo.seek(0,0)
     lista = arquivo.readlines()
     arquivo.close()
-    print('Essa lista a seguir sao seus generos')
-    print('Se quiser mais musica de algum genero digite o numero correspondente')
-    print('Se sua musica nao esta na lista digite -1 para voltar ao menu inicial')
+    print('\033[1;31m----------------------------------------------')
+    print('\033[1;34m     Essa lista a seguir sao seus generos     ')
+    print('\033[1;31m----------------------------------------------')
+    print('\033[1;35m Se quiser mais musica de algum genero digite o numero correspondente')
+    print('\033[1;35m Se sua musica nao esta na lista digite -1 para voltar ao menu inicial')
     cont = 0
     generos = []
     for line in lista:
@@ -91,9 +93,11 @@ def pesquisaMusica():
     arquivo.seek(0,0)
     lista = arquivo.readlines()
     arquivo.close()
-    print('Essa lista a seguir sao suas musicas')
-    print('Se quiser mais detalhes dessa musica digite o numero correspondente')
-    print('Se sua musica nao esta na lista digite -1 para voltar ao menu inicial')
+    print('\033[1;31m----------------------------------------------')
+    print('\033[1;34m     Essa lista a seguir sao suas musicas     ')
+    print('\033[1;31m----------------------------------------------')
+    print('\033[1;35m Se quiser mais detalhes dessa musica digite o numero correspondente')
+    print('\033[1;35m Se sua musica nao esta na lista digite -1 para voltar ao menu inicial')
     cont = 0
     musicas = []
     for line in lista:
@@ -116,11 +120,15 @@ def pesquisaArtista():
     arquivo.seek(0,0)
     lista = arquivo.readlines()
     arquivo.close()
-    print(" Abaixo segue uma lista de de artistas para voce escolher")
-    print(" digite o numero correspondente")
-    print(" Caso seu artista não esteja aqui, digite (-1),Sendo assim ")
-    print(" voce sera redirecionado para o menu, apartir dai escolha")
-    print(" a opcao para criar um novo artista ")
+    print('\033[1;31m------------------------------------------------------------')
+    print("\033[1;34m         Lista de artistas ")
+    print('\033[1;31m------------------------------------------------------------')
+    print("\033[1;35m Abaixo segue uma lista de de artistas para voce escolher")
+    print("\033[1;35m digite o numero correspondente")
+    print("\033[1;35m Caso seu artista não esteja aqui, digite (-1),Sendo assim ")
+    print("\033[1;35m Voce sera redirecionado para o menu, apartir dai escolha")
+    print("\033[1;35m A opcao para criar um novo artista ")
+    print('\033[1;31m------------------------------------------------------------')
     cont = 0
     artistas = []
     for line in lista:
@@ -131,19 +139,19 @@ def pesquisaArtista():
         artistas +=[artista]
         print(cont,linha_split[1])#organizar de forma que apareça só o nome
     id = int(input())
-    id = id -1
+    id = id -1 #indice da lista artistas, esse id é o artista escolhido pelo usuario.
     idMusica = ''
     for i in range (len(artistas)):
-        if(id == i):
-            idMusica = artistas[i]['IdMusicas']
+        if(id == i):#caso o id do artista escolhido esteja na lista original do aquivo geral de artistas
+            idMusica = artistas[i]['IdMusicas']#pegando o campo idMusicas para buscar suas musicas
     id_split = []
-    id_split = idMusica.split(',')  
+    id_split = idMusica.split(',')  #quebrando esse campo para poder enfim ter o id de todas as musicas daquele artista escolhido
     if(id != -1):
         arquivo = open('Musicas.txt','r+')
         arquivo.seek(0,0)
         lista = arquivo.readlines()
         arquivo.close()
-        print('Essa lista a seguir sao suas musicas')
+        print('Essa lista a seguir sao suas musicas')#lista de musicas do artista escolhido
         IdAntigo = ''
         cont = 0
         for line in lista:
@@ -162,11 +170,15 @@ def apagarMusica():
     arquivo.seek(0,0)
     lista = arquivo.readlines()
     arquivo.close()
-    print(" Abaixo segue uma lista de de artistas para voce escolher")
-    print(" digite o numero correspondente")
-    print(" Caso seu artista não esteja aqui, digite (-1),Sendo assim ")
-    print(" voce sera redirecionado para o menu, apartir dai escolha")
-    print(" a opcao para criar um novo artista ")
+    print('\033[1;31m------------------------------------------------------------')
+    print("\033[1;34m         Lista de artistas ")
+    print('\033[1;31m------------------------------------------------------------')
+    print("\033[1;35m Abaixo segue uma lista de de artistas para voce escolher")
+    print("\033[1;35m digite o numero correspondente")
+    print("\033[1;35m Caso seu artista não esteja aqui, digite (-1),Sendo assim ")
+    print("\033[1;35m Voce sera redirecionado para o menu, apartir dai escolha")
+    print("\033[1;35m A opcao para criar um novo artista ")
+    print('\033[1;31m------------------------------------------------------------')
     cont = 0
     artistas = []
     for line in lista:
@@ -183,15 +195,17 @@ def apagarMusica():
         if(idArtista  == i):
             idMusica = artistas[i]['IdMusicas']
     id_split = []
-    id_split = idMusica.split(',')  
+    id_split = idMusica.split(',')  #campo de artistas idMusica sendo tranformado em lista de ids de musicas do artista desejado
     if(idArtista != -1):
         arquivo = open('Musicas.txt','r+')
         arquivo.seek(0,0)
         lista = arquivo.readlines()
         arquivo.close()
-        print('Essa lista a seguir sao suas musicas')
-        print('Digite o numero correspondente a sua musica que deseja apagar')
-        print('Caso sua musica nao esteja na lista digite (-1)')
+        print('\033[1;31m----------------------------------------------')
+        print('\033[1;34m     Essa lista a seguir sao suas musicas     ')
+        print('\033[1;31m----------------------------------------------')
+        print('\033[1;35m Digite o numero correspondente a sua musica que deseja apagar')
+        print('\033[1;35m Caso sua musica nao esteja na lista digite (-1)')
         IdAntigo = ''
         cont = 0
         musicas = []
@@ -206,7 +220,7 @@ def apagarMusica():
             for i in range (len(id_split)):
                 if(IdAntigo == id_split[i]):
                     print(cont,nome)#organizar de forma que apareça só o nome
-        opcao = int(input())
+        opcao = int(input())#indice da lista de ids da lista de musicas do artista selecionado
         listAux = []
         if(opcao != -1):
             opcao = opcao -1# acompanhando o indice da lista de ids 
@@ -301,7 +315,6 @@ def criarGenero(nome):
 	print('Genero '+nome+' Criado com sucesso')
 def adcionarMusica(nomeArtista):
     #chamar funcao para atualizar o idmusica de artista
-    #tratar o erro de minusculos e maiusculos
     nomeMusica = input('Digite o nome da musica\n')
     arquivo = open('Musicas.txt','r+')
     lista = arquivo.readlines()
@@ -318,6 +331,8 @@ def adcionarMusica(nomeArtista):
             print('Já existe essa musica')
             Achou = True
     idNovo = ''
+    #nessa parte estou pegando o ulltimo id da musica
+    #quando adicionar uma nova musica o id dela sera o ultimo id + 1
     if len(musicas) == 0:
         id = 1
         idNovo = str(id)
@@ -377,11 +392,10 @@ def adcionarArtista(Nome,arquivo):
         arquivo = open('Artistas.txt','a')
         if len(artistas) != 0:
             idArtista = artistas[len(artistas)-1]['Id']
-            id = int(idArtista)#nao esta funcionando !
+            id = int(idArtista)
             id = id + 1
         if len(artistas) == 0 : 
-            id = 1#na hora de contar, converter pra int e somar 1
-        #nao sei se esta funcionando de fato
+            id = 1
         letras = ''
         for i in range(len(Nome)):
             if(Nome[i] != ' '):
@@ -392,9 +406,6 @@ def adcionarArtista(Nome,arquivo):
                      Nome+';'+ 
                      ""+';'+'\n')
             print('Artista criado')
-        #testando o caso do enter, mas não consegui resolver
-        if letras == ' ':
-            print('hahahahaha')
         arquivo.close()
     print('Voce sera redirecionado em 5 segundos, aguarde')
     sleep(5)
@@ -402,22 +413,27 @@ def main():
     criarArquivo()
     pygame.init()
     pygame.mixer.music.load('2')
-    pygame.mixer.music.play()
+    pygame.mixer.music.play(-1)
     os.system("clear")
-    print('Ajuste seus fones de ouvido !')
+    print('\033[1;36m     Ajuste seus fones de ouvido !             ')
     operador = 1
     while(operador !=6):
-        print('* * * * * * * * * * * * * * * * * * * *')
-        print('*Escolha uma opcao                    *')
-        print('*1) incluir novo artista              *')
-        print('*2) Acresentar nova musica            *')
-        print('*3) apagar musica em artista          *')
-        print('*4) pesquisar                         *')
-        print('*5) exibir lista ordenada por musica  *')
-        print('*6) sair                              *')
-        print('* * * * * * * * * * * * * * * * * * * *')
-        operador = int(input())
+        print('\033[1;31m----------------------------------------')
+        print('\033[1;36m            MENU PRINCIPAL              ')
+        print('\033[1;31m----------------------------------------')
 
+        print('\033[1;34m          ESCOLHA UMA OPÇÃO             ')
+        print('\033[1;34m 1-''\033[1;35m Incluir novo artista                ')
+        print('\033[1;34m 2-''\033[1;35m Acresentar nova musica              ')
+        print('\033[1;34m 3-''\033[1;35m Apagar musica em artista            ')
+        print('\033[1;34m 4-''\033[1;35m Pesquisar                           ')
+        print('\033[1;34m 5-''\033[1;35m Exibir lista ordenada por musica    ')
+        print('\033[1;34m 6-''\033[1;35m Sair                                ')
+        print('\033[1;31m----------------------------------------')
+        
+        operador = int(input())
+        #tratamento do erro : caso o usuario escreva leras
+        # esse tratamento de erro eu tive muitas duvidas de como fazer, e não consegui concluir, mas segue a minha ideia
         #if(type(operador) is str == True):# ver como montar essa linha
          #   print('operacao incorreta, volte ao menu')
          #   operador = int(operador)
@@ -450,6 +466,8 @@ def main():
                     print('1) Menu inicial')
                     print('2) Nome')
                     resp = int(input())
+                    if(resp == 1):
+                        escolha = 2
                     if(resp == 2):
                         print('Digite o nome do artista desejado de novo')
                         artista = input() 
@@ -474,11 +492,15 @@ def main():
                 arquivo.seek(0,0)
                 lista = arquivo.readlines()
                 arquivo.close()
-                print(" Abaixo segue uma lista de de artistas para voce escolher")
-                print(" digite o numero correspondente")
-                print(" Caso seu artista não esteja aqui, digite (-1),Sendo assim ")
-                print(" voce sera redirecionado para o menu, apartir dai escolha")
-                print(" a opcao para criar um novo artista ")
+                print('\033[1;31m------------------------------------------------------------')
+                print("\033[1;34m         Lista de artistas ")
+                print('\033[1;31m------------------------------------------------------------')
+                print("\033[1;35m Abaixo segue uma lista de de artistas para voce escolher")
+                print("\033[1;35m digite o numero correspondente")
+                print("\033[1;35m Caso seu artista não esteja aqui, digite (-1),Sendo assim ")
+                print("\033[1;35m Voce sera redirecionado para o menu, apartir dai escolha")
+                print("\033[1;35m A opcao para criar um novo artista ")
+                print('\033[1;31m------------------------------------------------------------')
                 cont = 0
                 nome = []
                 for line in lista:
@@ -487,7 +509,6 @@ def main():
                     linha_split = line.split(';')
                     print(cont,linha_split[1])#organizar de forma que apareça só o nome
                     nome +=[linha_split[1]]
-                print(linha_split)
                 id = int(input())
                 #para acompanhar o indice da lista
                 
@@ -503,6 +524,7 @@ def main():
                     os.system('clear')
                 if id == -1:
                     escolha = 2
+
         if(operador == 3):
             os.system("clear")
             escolha = 1
@@ -521,10 +543,12 @@ def main():
             os.system("clear")
             escolha = 1
             while(escolha == 1):
-                print('Deseja pesquisar por, caso deseje sair digite(-1)')
-                print('1)Por Artista')
-                print('2)Por Musica')
-                print('3)Po Genero')
+                print('\033[1;31m------------------------------------------------------')
+                print('\033[1;34m Deseja pesquisar por, caso deseje sair digite(-1)')
+                print('\033[1;31m------------------------------------------------------')
+                print('\033[1;34m 1-''\033[1;35m Por Artista')
+                print('\033[1;34m 2-''\033[1;35m Por Musica')
+                print('\033[1;34m 3-''\033[1;35m Por Genero')
                 opcao = int(input())
                 if(opcao == 1):
                     print('Deseja continuar a pesquisa por Artista?')
@@ -543,6 +567,7 @@ def main():
                         escolha = int(input())
                         if(escolha == 1):
                             pesquisaArtista()
+                
 
                 if(opcao == 2):
                     print('Deseja continuar a pesquisa por Musica?')
@@ -579,6 +604,8 @@ def main():
                             pesquisaGenero()
                 if(opcao == -1):
                     escolha = 2
+                sleep(5)
+                os.system("clear")
         if(operador == 5):
             os.system('clear')
             ordena()
