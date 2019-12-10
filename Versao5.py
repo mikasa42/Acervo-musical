@@ -1,7 +1,6 @@
 
 import os
 from time import sleep
-import pygame
 #Funcao que cria os arquivos necessarios para rodar o programa caso eles nao existam na pasta onde o programa está
 def criarArquivo():
     try:
@@ -411,9 +410,6 @@ def adcionarArtista(Nome,arquivo):
     sleep(5)
 def main():
     criarArquivo()
-    pygame.init()
-    pygame.mixer.music.load('2')
-    pygame.mixer.music.play(-1)
     os.system("clear")
     print('\033[1;36m     Ajuste seus fones de ouvido !             ')
     operador = 1
