@@ -408,10 +408,25 @@ def adcionarArtista(Nome,arquivo):
         arquivo.close()
     print('Voce sera redirecionado em 5 segundos, aguarde')
     sleep(5)
+def trataerro(nome):
+    nome= nome.strip()
+    alfabeto = ['a' , 'b' , 'c', 'd' , 'e' , 'f' , 'g' , 'h' , 'i' , 'j' , 'k' , 'l' , 'm' , 'n' , 'o' , 'p' , 'q' , 'r' , 's' , 't' , 'u' , 'v' , 'x' , 'w' , 'y' , 'z' ,'ç' , 'A' , 'B' , 'C' , 'D' , 'E' , 'F' , 'G' , 'H' , 'I' , 'J' , 'K' , 'L' , 'M' , 'N' , 'O' , 'P' , 'Q' , 'R' , 'S' , 'T' , 'U' , 'V' , 'X' , 'W' , 'Y' , 'Z' , 'Ç' , '!' , '@' , '$' , '%' , '¨' , '&' , ' * ' , '(' ,' )' , ' # ' ,  '_' , '+' ,   '/' , '*' , '-' , ':' , '>' , '<' ,  ';'   ,   '.'  ,  '}' , '{' , '^' , '~' , ']' , '[' , 'º' , 'ª' , '§' , '¬' , '¢' , '£' , '³' , '²' , '¹' , ]
+    numero = ['0','1','2','3','4','5','6','7','8','9']
+   
+    for v in alfabeto :
+        if v == nome:
+            i = -2
+            return i
+    for l in numero:
+        if l == nome:
+            valor = int(nome)
+            print(valor)
+            return valor
+
+
 def main():
     criarArquivo()
     os.system("clear")
-    print('\033[1;36m     Ajuste seus fones de ouvido !             ')
     operador = 1
     while(operador !=6):
         print('\033[1;31m----------------------------------------')
@@ -429,12 +444,13 @@ def main():
         
         operador = int(input())
         #tratamento do erro : caso o usuario escreva leras
-        # esse tratamento de erro eu tive muitas duvidas de como fazer, e não consegui concluir, mas segue a minha ideia
-        #if(type(operador) is str == True):# ver como montar essa linha
-         #   print('operacao incorreta, volte ao menu')
-         #   operador = int(operador)
-         #  continue
-        if(operador > 6 or operador < 1):
+        valor = trataerro(operador)
+        if(valor == -2):
+            print('operacao incorreta, volte ao menu')
+            operador = 10 # pois
+            continue
+         if(valor != -2):
+            if(valor > 6 or valor < 1):
             print('operacao incorreta, volte ao menu')
             continue
         if(operador == 1):
