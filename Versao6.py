@@ -48,6 +48,7 @@ def ordena():
     for i in range(len(musicas)):
         print('Seu atributo identificador:'+musicas[i]['Id']+' /'+
                 ' Seu nome :'+musicas[i]['Nome']+' /'+' Seu genero:'+musicas[i]['Genero'])
+    sleep(10)
 def pesquisaGenero():
     arquivo = open('Genero.txt','r+')
     arquivo.seek(0,0)
@@ -124,6 +125,7 @@ def pesquisaMusica():
         id = valor
     if(id == -1):
         print('Sua musica nao existe, voltar ao menu')
+        IdMusicaEscolhida = -1
     if(id != -1):
         id = id -1
         IdMusicaEscolhida = musicas[id]['Id']
@@ -185,7 +187,6 @@ def pesquisaArtista():
         return
     if(valor != -2):
         id = valor
-        print(id)
     #erro tratado 
        
     if(id != -1):
@@ -468,7 +469,6 @@ def adcionarArtista(Nome,arquivo):
         arquivo.close()
     print('Voce sera redirecionado em 5 segundos, aguarde')
     sleep(5)
-<<<<<<< HEAD
 def trataerro(Digito):
     Digito = Digito.strip()
     alfabeto = ['a' , 'b' , 'c', 'd' , 'e' , 'f' , 'g' , 'h' , 'i' , 'j' , 'k' , 'l' , 'm' , 'n' , 'o' , 'p' , 'q' , 'r' , 's' , 't' , 'u' , 'v' , 'x' , 'w' , 'y' , 'z' ,'ç' , 'A' , 'B' , 'C' , 'D' , 'E' , 'F' , 'G' , 'H' , 'I' , 'J' , 'K' , 'L' , 'M' , 'N' , 'O' , 'P' , 'Q' , 'R' , 'S' , 'T' , 'U' , 'V' , 'X' , 'W' , 'Y' , 'Z' , 'Ç' , '!' , '@' , '$' , '%' , '¨' , '&' , ' * ' , '(' ,' )' , ' # ' ,  '_' , '+' ,   '/' , '*' , '-' , ':' , '>' , '<' ,  ';'   ,   '.'  ,  '}' , '{' , '^' , '~' , ']' , '[' , 'º' , 'ª' , '§' , '¬' , '¢' , '£' , '³' , '²' , '¹' , ]
@@ -505,21 +505,13 @@ def main():
         print('\033[1;31m----------------------------------------')
         Digito = input()
         #tratamento do erro : caso o usuario escreva ler
-
-        valor = trataerro(operador)
+        valor = trataerro(Digito)
         if(valor == -2):
             print('operacao incorreta, volte ao menu')
-            operador = 10 # pois
-            continue
-         if(valor != -2):
-            operador = valor
-            sleep(1)
-            os.system('clear')
             continue
         if(valor != -2):
             operador = valor
-            print('entrou aqui')
-            print(operador)
+            sleep(1)
         if(operador == 1):
             escolha = 1 
             while(escolha == 1):
